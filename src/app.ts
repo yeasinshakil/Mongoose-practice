@@ -34,7 +34,8 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
     const userSchema = new Schema<IUser>({
         id: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         role: { type: String, required: true },
         name: {
@@ -52,6 +53,33 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
     // model define
 
     const User = model<IUser>('User', userSchema)
+
+    const userCreateForDb = async () => {
+
+        const user = new User({
+            id: "123456",
+            role: "admin",
+            name: {
+                firstName: "John",
+                middleName: "Doe",
+                lastName: "Doe"
+            },
+            dateOfBirth: "1990-01-01",
+            email: "shakil@gmail.com",
+            password: "shakil1234",
+            gender: "male",
+            phone: "0987654321",
+            emergencyContact: "0987654321",
+            presentAddress: "123 Main Street",
+            permanentAddress: "123 Main Street"
+        })
+
+        await user.save()
+        console.log('user saved::: ', user);
+
+    }
+    userCreateForDb();
+
     res.send('Hello World!');
     next()
 })
