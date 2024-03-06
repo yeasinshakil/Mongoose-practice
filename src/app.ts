@@ -5,6 +5,7 @@ import userRouter from './app/modules/user/user.routes';
 const app: Application = express();
 app.use(cors())
 
+// Data parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

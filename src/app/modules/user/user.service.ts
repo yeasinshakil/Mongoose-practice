@@ -1,8 +1,22 @@
+import { IUser } from "./user.interface";
 import { User } from "./user.model";
 
-export const userCreateForDb = async () => {
+export const userCreateForDb = async (payload: IUser) => {
 
-    const user = new User({
+    const user = new User(payload)
+
+    await user.save()
+    console.log('user saved::: ', user);
+
+}
+
+export const getUserFromDb = async () => {
+    const users = await User.find();
+    return users
+}
+
+/*
+{
         id: "123456",
         role: "admin",
         name: {
@@ -18,9 +32,5 @@ export const userCreateForDb = async () => {
         emergencyContact: "0987654321",
         presentAddress: "123 Main Street",
         permanentAddress: "123 Main Street"
-    })
-
-    await user.save()
-    console.log('user saved::: ', user);
-
-}
+    }
+*/
