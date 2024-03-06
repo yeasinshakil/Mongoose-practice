@@ -2,19 +2,35 @@ import { IUser } from "./user.interface";
 import { User } from "./user.model";
 
 export const userCreateForDb = async (payload: IUser) => {
+    try {
+        const user = new User(payload)
 
-    const user = new User(payload)
+        await user.save()
+        // console.log('user saved::: ', user);
+        return user
 
-    await user.save()
-    console.log('user saved::: ', user);
+    } catch (error) {
+        console.log("error from UserCreatedForDB function:: ⚠⚠⚠ ", error)
+
+    }
 
 }
 
 export const getUserFromDb = async () => {
-    const users = await User.find();
-    return users
+    try {
+        const users = await User.find();
+        return users
+
+    } catch (error) {
+        console.log("⚠⚠⚠ error from getUserFromDb function:: ⚠⚠⚠ ", error)
+
+    }
 }
 
+export const getUserbyIdFromDb = async (payload: string) => {
+    const user = await User.findOne({ id: payload }, { name: 1, phone: 1 },)
+    return user
+}
 /*
 {
         id: "123456",
