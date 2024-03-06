@@ -1,7 +1,9 @@
-import { Schema, model } from "mongoose"
-import { IUser } from "./user.interface"
+import { Model, Schema, model } from "mongoose"
+import { IUser, IUserMethods } from "./user.interface"
 
-const userSchema = new Schema<IUser>({
+type userModel = Model<IUser, {}, IUserMethods>
+
+const userSchema = new Schema<IUser, userModel, IUserMethods>({
     id: {
         type: String,
         required: true,
@@ -22,4 +24,4 @@ const userSchema = new Schema<IUser>({
 
 // model define
 
-export const User = model<IUser>('User', userSchema)
+export const User = model<IUser, userModel>('User', userSchema)
