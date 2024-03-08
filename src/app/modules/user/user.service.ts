@@ -4,9 +4,10 @@ import { User } from "./user.model";
 export const userCreateForDb = async (payload: IUser) => {
     try {
         const user = new User(payload)
+        console.log(user.fullName());
 
         await user.save()
-        // console.log('user saved::: ', user);
+        console.log('user saved::: ', user);
         return user
 
     } catch (error) {

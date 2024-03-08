@@ -22,6 +22,9 @@ const userSchema = new Schema<IUser, userModel, IUserMethods>({
     phone: { type: String, required: true },
 })
 
+userSchema.method('fullName', function () {
+    return `${this.name.firstName}  ${this.name.lastName}`
+})
 // model define
 
 export const User = model<IUser, userModel>('User', userSchema)
