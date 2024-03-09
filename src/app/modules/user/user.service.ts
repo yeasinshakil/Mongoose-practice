@@ -29,7 +29,7 @@ export const getUserFromDb = async () => {
 }
 
 export const getUserbyIdFromDb = async (payload: string) => {
-    const user = await User.findOne({ id: payload }, { name: 1, phone: 1 },)
+    const user = await User.findOne({ id: payload }, { : 1, phone: 1 },)
     return user
 }
 /*
